@@ -41,8 +41,9 @@ jobs:
         id: get_ecr_url
         run: |
           cd infra
-          echo "ECR_URL=$(terraform output -raw ecr_repository_url)" 
-          echo "ECR_URL=$(terraform output -raw ecr_repository_url)" >> $GITHUB_ENV
+          ECR_URL=$($TERRAFORM_CLI_PATH output -raw ecr_repository_url)
+          echo "Extracted ECR_URL: $ECR_URL"
+          echo "ECR_URL=$ECR_URL" >> $GITHUB_ENV
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
