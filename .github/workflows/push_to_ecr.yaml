@@ -13,6 +13,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -21,10 +24,14 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Initialize Terraform
-        run: terraform init
+        run: |
+          cd infra
+          terraform init
 
       - name: Apply Terraform (Create/Update ECR)
-        run: terraform apply -auto-approve
+        run: |
+          cd infra
+          terraform apply -auto-approve
 
       - name: Extract version from tag
         id: vars
@@ -40,6 +47,6 @@ jobs:
 
       - name: Build, tag, and push image
         run: |
-          docker build -t flask-app:$VERSION .
-          docker tag flask-app:$VERSION $ECR_URL:$VERSION
+          docker build -t demo-flask-app:$VERSION .
+          docker tag demo-flask-app:$VERSION $ECR_URL:$VERSION
           docker push $ECR_URL:$VERSION
