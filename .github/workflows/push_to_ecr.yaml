@@ -56,3 +56,6 @@ jobs:
           docker build -t demo-flask-app:$VERSION .
           docker tag demo-flask-app:$VERSION $ECR_URL:$VERSION
           docker push $ECR_URL:$VERSION
+
+          docker tag demo-flask-app:$VERSION $ECR_URL:latest
+          docker push $ECR_URL:latest

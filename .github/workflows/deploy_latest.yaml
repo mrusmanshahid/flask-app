@@ -26,4 +26,5 @@ jobs:
 
       - name: Terraform Apply for Latest
         run: |
+          cd infra
           terraform apply -auto-approve
