@@ -32,7 +32,7 @@ jobs:
       - name: Terraform Apply for Version
         run: |
           cd infra
-          echo inputs.version
+          echo {{ inputs.version }}
           terraform init
           terraform apply -auto-approve \
             -var="deploy_version={{ inputs.version }}"
