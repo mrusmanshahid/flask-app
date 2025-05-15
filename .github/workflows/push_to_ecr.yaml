@@ -40,6 +40,7 @@ jobs:
       - name: Extract ECR Repository URL
         id: get_ecr_url
         run: |
+          cd infra
           echo "ECR_URL=$(terraform output -raw ecr_repository_url)" 
           echo "ECR_URL=$(terraform output -raw ecr_repository_url)" >> $GITHUB_ENV
 
