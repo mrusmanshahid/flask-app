@@ -42,7 +42,9 @@ jobs:
         run: |
           cd infra
           ECR_URL=$(terraform output ecr_repository_url)
+          echo "ECR_URL: '${ECR_URL}'" | sed 's/./& /g'
           echo "Extracted ECR_URL: $ECR_URL"
+          echo "ECR_URL=$ECR_URL" >> $GITHUB_ENV
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
