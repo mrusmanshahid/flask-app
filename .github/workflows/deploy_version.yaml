@@ -32,5 +32,6 @@ jobs:
       - name: Terraform Apply for Version
         run: |
           cd infra
+          terraform init
           terraform apply -auto-approve \
             -var="version={{ inputs.version }}"
