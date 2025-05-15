@@ -34,4 +34,4 @@ jobs:
           cd infra
           terraform init
           terraform apply -auto-approve \
-            -var="version={{ inputs.version }}"
+            -var="deploy_version={{ inputs.version }}"
